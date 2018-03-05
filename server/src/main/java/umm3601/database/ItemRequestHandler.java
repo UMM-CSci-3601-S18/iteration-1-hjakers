@@ -26,6 +26,14 @@ public class ItemRequestHandler {
         return  getItems(req, res, "emoji");
     }
 
+    public String getGoalJSON(Request req, Response res) {
+        return getItemJSON(req, res, "goals");
+    }
+
+    public String getGoals(Request req, Response res) {
+        return getItems(req, res, "goals");
+    }
+
     public String getItemJSON(Request req, Response res, String collection){
         res.type("application/json");
         String id = req.params("id");
