@@ -19,6 +19,10 @@ export class GoalsService {
         return this.http.get<Goal[]>(this.goalUrl);
     }
 
+    getGoalById(id: string): Observable<Goal> {
+        return this.http.get<Goal>(this.goalUrl + '/' + id);
+    }
+
     filterByUserId(userId?: number): void {
         if(!(userId == null)) {
             if(this.parameterPresent('userId=')) {
