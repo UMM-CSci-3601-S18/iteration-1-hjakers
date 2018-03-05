@@ -94,7 +94,7 @@ public class ItemController {
     // documents if no query parameter is specified. If the goal parameter is
     // specified, then the collection is filtered so only documents of that
     // specified goal are found.
-    public String getItems(Map<String, String[]> queryParams, String collection) {
+    public String getItems(Map<String, String[]> queryParams, String collectionName) {
 
         Document filterDoc = new Document();
 
@@ -103,14 +103,32 @@ public class ItemController {
 
         // This bit of code parametrizes the queryParams.containsKey code that we
         // will no longer need because it's all in this loop
-        String[] keys = getKeysByCollectionName(collection);
-        for(int i = 0; i < keys.length; i++) {
+        // Update: It works in the intended way depending on the type
+        String[] keys = getKeysByCollectionName(collectionName);
+        String[] keyTypes = ItemControllerUtility.getKeyTypesByCollectionName(collectionName);
+        for(int i = 0; i < keys.length && i < keyTypes.length; i++) {
             if(queryParams.containsKey(keys[i])) {
-                String targetContent = (queryParams.get(keys[i])[0]);
-                Document contentRegQuery = new Document();
-                contentRegQuery.append("$regex", targetContent);
-                contentRegQuery.append("$options", "i");
-                filterDoc = filterDoc.append(keys[i], contentRegQuery);
+                switch(keyTypes[i]) {
+                    case "int": {
+                        int targetInt = Integer.parseInt(queryParams.get(keys[i])[0]);
+                        filterDoc = filterDoc.append(keys[i], targetInt);
+                    }
+                    case "String": {
+                        String targetContent = (queryParams.get(keys[i])[0]);
+                        Document contentRegQuery = new Document();
+                        contentRegQuery.append("$regex", targetContent);
+                        contentRegQuery.append("$options", "i");
+                        filterDoc = filterDoc.append(keys[i], contentRegQuery);
+                    }
+                    case "long": {
+                        long targetLong = Long.parseLong(queryParams.get(keys[i])[0]);
+                        filterDoc = filterDoc.append(keys[i], targetLong);
+                    }
+                    case "boolean": {
+                        boolean targetBool = Boolean.parseBoolean(queryParams.get(keys[i])[0]);
+                        filterDoc = filterDoc.append(keys[i], targetBool);
+                    }
+                }
             }
         }
 
@@ -141,7 +159,7 @@ public class ItemController {
         }*/
 
         // FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingItems = itemControllerUtility.getCollectionByName(collection).find(filterDoc);
+        FindIterable<Document> matchingItems = itemControllerUtility.getCollectionByName(collectionName).find(filterDoc);
 
         return JSON.serialize(matchingItems);
     }
