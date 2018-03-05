@@ -1,0 +1,61 @@
+{
+    "type": "array",
+    "minItems": 15,
+    "maxItems": 15,
+    "items": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+            "user_id": {
+                "type": "integer",
+                "enum": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14
+                ],
+                "uniqueItems": true
+            },
+            "goal": {
+                "type": "string",
+                "enum": [
+                    "Wake up by 8 AM",
+                    "Take my pills in the morning",
+                    "Clean my room this Sunday",
+                    "Start my paper by Monday",
+                    "Eat lunch today",
+                    "Shower tonight",
+                    "Call Mom",
+                    "Write to Grandpa",
+                    "Write down one good thing that happened today",
+                    "Sweep the kitchen",
+                    "Help my sister with her homework"]
+            },
+            "timeCreated": {
+                "type": "integer",
+                "minimum": 0
+            },
+            "complete": {
+                "type": "boolean"
+            }
+        },
+        "additionalProperties": false,
+        "required": [
+            "user_id",
+            "goal",
+            "timeCreated",
+            "complete"
+        ]
+    }
+}
