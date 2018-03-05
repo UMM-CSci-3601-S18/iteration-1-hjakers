@@ -13,8 +13,16 @@
     border-style: solid;
 }
 
-.phone-numbers {
-    max-width: 500px;
+.resources-div {
+    width: 25%;
+}
+
+.main-div {
+    width: 50%;
+}
+
+.phone-div {
+    width: 25%;
 }
 
 .example-header-image {
@@ -34,7 +42,20 @@
 }
 
 .phone-numbers {
-    background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/fresh_snow.png");
+    background-color: #d0e0e6;
+}
+
+.main-card {
+    background-color: #d0e0e6;
+}
+
+.resources-card {
+    background-color: #d0e0e6;
+}
+
+.best-div {
+    padding: 25px;
+    background-color: transparent;
 }
 
 #phone-numbers-subtitle {

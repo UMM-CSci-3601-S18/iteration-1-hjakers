@@ -4,9 +4,10 @@
     <div class ="main-top">Resources</div>
 </header>
 
-<div layout='row' layout-xs="column" class="testThing">
+<div layout='row' layout-xs="column" class="best-div">
 
     <!-- Phone Numbers Card -->
+    <div class="phone-div">
     <mat-card class="phone-numbers">
         <mat-card-title class="phone-numbers-title"><mat-icon id="phone-icon">phone</mat-icon>Phone Numbers</mat-card-title>
         <mat-card-subtitle id="phone-numbers-subtitle">If you feel that you are in need of any sort of assistance,
@@ -50,18 +51,32 @@
             <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">message</mat-icon> 741741</mat-panel-description>
         </mat-expansion-panel>
         <br>
-
     </mat-card>
+    </div>
 
     <!-- Main Title Card -->
-    <mat-card>
-        <mat-card-title id="resources-title">{{ this.title }}</mat-card-title>
+    <div class="main-div">
+    <mat-card class="main-card">
+        <mat-card-title id="main-thing-title">{{ this.title }}</mat-card-title>
         <mat-card-subtitle>Amazing resources would go here.</mat-card-subtitle>
         <mat-divider></mat-divider>
         <mat-card-content>
             Interesting content.
         </mat-card-content>
     </mat-card>
+    </div>
+
+    <!-- Resources Card -->
+    <div calss="resources-div">
+    <mat-card class="resources-card">
+        <mat-card-title id="resources-title">Links</mat-card-title>
+        <mat-card-subtitle>These links take you to helpful pages.</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            Put links here.
+        </mat-card-content>
+    </mat-card>
+    </div>
 
 </div>
 
