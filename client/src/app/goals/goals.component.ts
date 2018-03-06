@@ -28,19 +28,13 @@ export class GoalsComponent implements OnInit {
     public goalComplete: boolean;
     public user_id: number;
 
-
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
-    /* openDialog(): void {
-         const newGoal: Goal = {_id: '', user_id: -1, goal: '', timeCreated: -1, complete: false};
-         const dialogRef = this.dialog.open()
-     }*/
-
     openDialog(): void {
-        const newGoal: Goal = {_id: '', user_id:-1, goal:'', timeCreated:-1, complete:false};
+        const newGoal: Goal = {_id: '', user_id:this.user_id, goal:'', timeCreated:-1, complete:false};
         const dialogRef = this.dialog.open(AddGoalComponent, {
             width: '500px',
-            data: { goal: newGoal }
+            data: { goal : newGoal }
         });
 
         dialogRef.afterClosed().subscribe(result => {
