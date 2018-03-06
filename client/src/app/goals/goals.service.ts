@@ -25,17 +25,20 @@ export class GoalsService {
 
     filterByUserId(userId?: number): void {
         if(!(userId == null)) {
-            if(this.parameterPresent('userId=')) {
-                this.removeParameter('userId=');
+            if(this.parameterPresent('user_id=')) {
+                this.removeParameter('user_id=');
             }
-            if(!(this.goalUrl.indexOf('?') !== -1)) {
-                this.goalUrl += '?';
+            if (this.goalUrl.indexOf('?') !== -1) {
+                // there was already some information passed in this url
+                this.goalUrl += 'user_id=' + this.goalUrl + '&';
+            } else {
+                // this was the first bit of information to pass in the url
+                this.goalUrl += '?user_id=' + this.goalUrl + '&';
             }
-            this.goalUrl += 'userId=' + userId + '&';
         }
         else {
-            if(this.parameterPresent('userId=')) {
-                let start = this.goalUrl.indexOf('userId=');
+            if(this.parameterPresent('user_id=')) {
+                let start = this.goalUrl.indexOf('user_id=');
                 const end = this.goalUrl.indexOf('&', start);
                 if(this.goalUrl.substring(start - 1, start) === '?') {
                     start = start - 1;

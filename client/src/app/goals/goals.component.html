@@ -30,7 +30,7 @@
                 <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit</button>
 
                 <mat-accordion class="your-goals-content" *ngIf="goals; else goalsError">
-                    <mat-expansion-panel #elem class="goals" [id]="goal._id" *ngFor="let goal of this.filterGoals(null, null, null)">
+                    <mat-expansion-panel #elem class="goals" *ngFor="let goal of this.filterGoals(null, null, null)">
                         <mat-expansion-panel-header>
                             <mat-panel-title matTooltip="email: " ></mat-panel-title>
                         </mat-expansion-panel-header>

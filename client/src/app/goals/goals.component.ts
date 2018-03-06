@@ -26,10 +26,17 @@ export class GoalsComponent implements OnInit {
     public goalComplete: boolean;
     public user_id: number;
 
-   /* openDialog(): void {
-        const newGoal: Goal = {_id: '', user_id: -1, goal: '', timeCreated: -1, complete: false};
-        const dialogRef = this.dialog.open()
-    }*/
+    private highlightedID: {'$oid': string} = { '$oid': '' };
+
+    /* openDialog(): void {
+         const newGoal: Goal = {_id: '', user_id: -1, goal: '', timeCreated: -1, complete: false};
+         const dialogRef = this.dialog.open()
+     }*/
+
+
+    isHighlighted(goal: Goal): boolean {
+        return goal._id['$oid'] === this.highlightedID['$oid'];
+    }
 
    refreshGoals(): Observable<Goal[]> {
        const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
