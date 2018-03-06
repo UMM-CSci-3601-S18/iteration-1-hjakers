@@ -30,10 +30,10 @@ export class GoalsService {
             }
             if (this.goalUrl.indexOf('?') !== -1) {
                 // there was already some information passed in this url
-                this.goalUrl += 'user_id=' + this.goalUrl + '&';
+                this.goalUrl += 'user_id=' + userId + '&';
             } else {
                 // this was the first bit of information to pass in the url
-                this.goalUrl += '?user_id=' + this.goalUrl + '&';
+                this.goalUrl += '?user_id=' + userId + '&';
             }
         }
         else {

@@ -25,16 +25,17 @@
             <mat-card-subtitle class="your-goals-subtitle">All of your goals are displayed here.</mat-card-subtitle>
             <mat-card-content>
                 <mat-form-field>
-                    <input matInput id="goalUserId" #input type="number" placeholder="Enter your user id" (input)="goalUserId = $event.target.value">
+                    <input matInput id="goalUserId" #input type="number" placeholder="Enter your user id" (input)="user_id = $event.target.value">
                 </mat-form-field>
                 <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit</button>
 
                 <mat-accordion class="your-goals-content" *ngIf="goals; else goalsError">
                     <mat-expansion-panel #elem class="goals" *ngFor="let goal of this.filterGoals(null, null, null)">
                         <mat-expansion-panel-header>
-                            <mat-panel-title matTooltip="email: " ></mat-panel-title>
+                            <mat-panel-title matTooltip="Created on: {{goal.timeCreated}}">{{goal.goal}}</mat-panel-title>
                         </mat-expansion-panel-header>
-                        <mat-panel-description>Goal: {{goal.goal}} </mat-panel-description>
+                        <mat-panel-description>Complete: {{goal.complete}} </mat-panel-description>
+                        <mat-panel-description>User ID: {{goal.user_id}}</mat-panel-description>
                     </mat-expansion-panel>
                 </mat-accordion>
                 <ng-template #goalsError>

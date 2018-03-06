@@ -16,6 +16,7 @@ export class GoalsComponent implements OnInit {
     constructor(public goalService: GoalsService,
                 public dialog: MatDialog) {
         this.title = 'Goals';
+        this.user_id = 2;
     }
 
     public goals: Goal[];
@@ -25,6 +26,7 @@ export class GoalsComponent implements OnInit {
     public goalTimeCreated: number;
     public goalComplete: boolean;
     public user_id: number;
+
 
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
