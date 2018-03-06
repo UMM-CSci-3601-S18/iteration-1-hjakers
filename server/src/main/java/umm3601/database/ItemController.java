@@ -103,7 +103,8 @@ public class ItemController {
         String[] keys = ItemControllerUtility.getKeysByCollectionName(collectionName);
         String[] keyTypes = ItemControllerUtility.getKeyTypesByCollectionName(collectionName);
         for(int i = 0; i < keys.length && i < keyTypes.length; i++) {
-            if(queryParams.containsKey(keys[i]) && !(queryParams.get(keys[i]))[0].equals("")) {
+            System.out.println(i);
+            if(queryParams.containsKey(keys[i])) {
                 switch(keyTypes[i]) {
                     case "int": {
                         int targetInt = Integer.parseInt(queryParams.get(keys[i])[0]);
