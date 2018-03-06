@@ -4,30 +4,37 @@
 </header>
 
 <main>
-    <div class ="first-sec">
+    <div layout="row">
+
+    <!-- Managing Goals Card -->
+        <div class="first-sec">
         <mat-card> <mat-card-title class="goal-title">Managing Goals</mat-card-title>
-            <mat-card-subtitle class="goal-subtitle">Choose one of the following that you find helpful.</mat-card-subtitle>
+            <mat-card-subtitle class="goal-subtitle"></mat-card-subtitle>
             <mat-card-content class="goal-content">
-                <li class="content-item"><mat-icon id="add-icon">add</mat-icon>Create</li>
-                <li class="content-item"><mat-icon id="edit-icon">create</mat-icon>Edit</li>
-                <li class="content-item"><mat-icon id="delete-icon">delete_forever</mat-icon>Delete</li>
+                <li class="content-item"><button mat-button class="goal-button"><mat-icon id="add-icon">add</mat-icon>Create</button></li>
+                <li class="content-item"><button mat-button class="goal-button"><mat-icon id="edit-icon">create</mat-icon>Edit</button></li>
+                <li class="content-item"><button mat-button class="goal-button"><mat-icon id="delete-icon">delete_forever</mat-icon>Delete</button></li>
             </mat-card-content>
-
-
         </mat-card>
     </div>
 
-    <!--<div class="list-sec">
-        <mat-accordion *ngIf="goals; else goalsError">
-            <mat-expansion-panel #elem class="goals" [expanded]="this.isHighlighted(goal)" *ngFor="let goal of this.filterGoals(goalGoal, goalTime, goalComplete)">
-                <mat-expansion-panel-header>
-                    <mat-panel-title matTooltip="goal: {{goal.complete}}}">{{goal.userId}}</mat-panel-title>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </div>-->
+    <!-- Your Goals Section -->
+        <div class="second-sec">
+        <mat-card> <mat-card-title class="your-goals-title">Your Goals</mat-card-title>
+            <mat-card-subtitle class="your-goals-subtitle">All of your goals are displayed here.</mat-card-subtitle>
+            <mat-accordion class="your-goals-content">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title matTooltip="email: " ></mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description >Works for </mat-panel-description>
+                    <mat-panel-description>Age: years old</mat-panel-description>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card>
+    </div>
+    </div>
 </main>
-
 </body>
 
 

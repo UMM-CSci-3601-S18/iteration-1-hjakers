@@ -18,13 +18,7 @@
 }
 
 .first-sec {
-    position: absolute;
-    top: 100px;
-    bottom: 0;
-    left: 0;
-    right: 25px;
-    width: 250px;
-    height: 100px;
+    width: 25%
 }
 
 .goal-title {
@@ -38,22 +32,27 @@
     font-size: 21px;
 }
 
+.second-sec {
+    width: 75%
+}
+
+.your-goals-title {
+    text-align: left;
+    font-size: 32px;
+}
+
 #add-icon {
     color: forestgreen;
-    vertical-align: bottom;
-
 }
 
 #edit-icon {
     color: lightseagreen;
-    vertical-align: bottom;
 }
 
 #delete-icon {
     color: red;
-    vertical-align: bottom;
 }
 
-.content-item {
-    padding-bottom: 10px;
+.goal-button {
+    font-size: 25px;
 }

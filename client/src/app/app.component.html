@@ -1,3 +1,5 @@
+<!-- The Original Navbar
+
 <td-layout #layout>
     <td-navigation-drawer flex sidenavTitle="Lab 4" >
         <mat-nav-list>
@@ -14,4 +16,23 @@
         <router-outlet></router-outlet>
     </td-layout-nav>
 </td-layout>
+
+-->
+<html>
+<head>
+
+</head>
+<body>
+
+<ul class="nav-things">
+    <li><a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+    <li><a [routerLink]="['/goals']" routerLinkActive="active">Goals</a></li>
+    <li><a [routerLink]="['/resources']" routerLinkActive="active">Resources</a></li>
+    <li><a [routerLink]="['/users']" routerLinkActive="active">Users</a></li>
+</ul>
+<router-outlet></router-outlet>
+
+</body>
+</html>
+
 
