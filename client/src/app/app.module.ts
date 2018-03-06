@@ -13,6 +13,7 @@ import {AddUserComponent} from './users/add-user.component';
 import {ResourcesComponent} from "./resources/resources.component";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
+import {AddGoalComponent} from "./goals/add-goal.component";
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import {GoalsService} from "./goals/goals.service";
         AddUserComponent,
         ResourcesComponent,
         GoalsComponent,
+        AddGoalComponent,
     ],
     providers: [
         UserListService,
@@ -36,7 +38,7 @@ import {GoalsService} from "./goals/goals.service";
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
     ],
     entryComponents: [
-      AddUserComponent,
+      AddUserComponent, AddGoalComponent,
     ],
     bootstrap: [AppComponent]
 })

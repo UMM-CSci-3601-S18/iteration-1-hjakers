@@ -3,6 +3,7 @@ import {GoalsService} from "./goals.service";
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {Goal} from './goal'
+import {AddGoalComponent} from "./add-goal.component";
 
 @Component({
     selector: 'goals-component',
@@ -35,62 +36,82 @@ export class GoalsComponent implements OnInit {
          const dialogRef = this.dialog.open()
      }*/
 
+    openDialog(): void {
+        const newGoal: Goal = {_id: '', user_id:-1, goal:'', timeCreated:-1, complete:false};
+        const dialogRef = this.dialog.open(AddGoalComponent, {
+            width: '500px',
+            data: { goal: newGoal }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.goalService.addNewGoal(result).subscribe(
+                addUserResult => {
+                    this.highlightedID = addUserResult;
+                    this.refreshGoals();
+                },
+                err => {
+                    // This should probably be turned into some sort of meaningful response.
+                    console.log('There was an error adding the goal.');
+                    console.log('The error was ' + JSON.stringify(err));
+                });
+        });
+    }
 
     isHighlighted(goal: Goal): boolean {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
 
-   refreshGoals(): Observable<Goal[]> {
-       const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
-       goalObservable.subscribe(
-           goals => {
-               this.goals = goals;
-               this.filterGoals(this.goalGoal, this.goalTimeCreated, this.goalComplete);
-           },
-           err => {
-               console.log(err);
-           });
-       return goalObservable;
-   }
+    refreshGoals(): Observable<Goal[]> {
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
+        goalObservable.subscribe(
+            goals => {
+                this.goals = goals;
+                this.filterGoals(this.goalGoal, this.goalTimeCreated, this.goalComplete);
+            },
+            err => {
+                console.log(err);
+            });
+        return goalObservable;
+    }
 
-   public filterGoals(searchGoal: string, searchTime: number, searchComplete: boolean) {
-       this.filteredGoals = this.goals;
+    public filterGoals(searchGoal: string, searchTime: number, searchComplete: boolean) {
+        this.filteredGoals = this.goals;
 
-       if(searchGoal != null) {
-           searchGoal = searchGoal.toLocaleLowerCase();
+        if(searchGoal != null) {
+            searchGoal = searchGoal.toLocaleLowerCase();
 
-           this.filteredGoals = this.filteredGoals.filter(goal => {
-               return !searchGoal || goal.goal.toLowerCase().indexOf(searchGoal) !== -1;
-           });
-       }
+            this.filteredGoals = this.filteredGoals.filter(goal => {
+                return !searchGoal || goal.goal.toLowerCase().indexOf(searchGoal) !== -1;
+            });
+        }
 
-       if(searchTime != null) {
-           this.filteredGoals = this.filteredGoals.filter(goal => {
-               return !searchTime || goal.timeCreated == searchTime;
-           });
-       }
+        if(searchTime != null) {
+            this.filteredGoals = this.filteredGoals.filter(goal => {
+                return !searchTime || goal.timeCreated == searchTime;
+            });
+        }
 
-       if(searchComplete != null) {
-           this.filteredGoals = this.filteredGoals.filter(goal => {
-               return null || goal.complete == searchComplete;
-           });
-       }
+        if(searchComplete != null) {
+            this.filteredGoals = this.filteredGoals.filter(goal => {
+                return null || goal.complete == searchComplete;
+            });
+        }
 
-       return this.filteredGoals;
+        return this.filteredGoals;
 
-   }
+    }
 
-   loadService(): void {
-       this.goalService.getGoals(this.user_id).subscribe(
-           goals => {
-               this.goals = goals;
-               this.filteredGoals = this.goals;
-           },
-           err => {
-               console.log(err);
-           }
-       );
-   }
+    loadService(): void {
+        this.goalService.getGoals(this.user_id).subscribe(
+            goals => {
+                this.goals = goals;
+                this.filteredGoals = this.goals;
+            },
+            err => {
+                console.log(err);
+            }
+        );
+    }
 
     ngOnInit(): void {
         this.refreshGoals();

@@ -11,9 +11,11 @@
         <mat-card> <mat-card-title class="goal-title">Managing Goals</mat-card-title>
             <mat-card-subtitle class="goal-subtitle"></mat-card-subtitle>
             <mat-card-content class="goal-content">
-                <li class="content-item"><button mat-button class="goal-button"><mat-icon id="add-icon">add</mat-icon>Create</button></li>
-                <li class="content-item"><button mat-button class="goal-button"><mat-icon id="edit-icon">create</mat-icon>Edit</button></li>
-                <li class="content-item"><button mat-button class="goal-button"><mat-icon id="delete-icon">delete_forever</mat-icon>Delete</button></li>
+                <li class="content-item" id="addNewGoal"><button mat-raised-button (click)="openDialog()" class="goal-button"><mat-icon id="add-icon">add</mat-icon>Create</button></li>
+                <br>
+                <li class="content-item"><button mat-raised-button class="goal-button"><mat-icon id="edit-icon">create</mat-icon>Edit</button></li>
+                <br>
+                <li class="content-item"><button mat-raised-button class="goal-button"><mat-icon id="delete-icon">delete_forever</mat-icon>Delete</button></li>
             </mat-card-content>
         </mat-card>
     </div>
