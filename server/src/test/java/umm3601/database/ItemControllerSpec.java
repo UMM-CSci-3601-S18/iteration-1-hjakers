@@ -91,8 +91,9 @@ public class ItemControllerSpec {
         itemDocuments.drop();
         List<Document> testItems = new ArrayList<>();
         testItems.add(Document.parse("{\n" +
-            "                    name: \"Aurora\",\n" +
+            "                    user_id: 0,\n" +
             "                    goal: \"To get an A in software design!\",\n" +
+            "                    "
             "                    category: \"School\",\n" +
             "                }"));
         testItems.add(Document.parse("{\n" +

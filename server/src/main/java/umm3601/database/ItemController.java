@@ -176,7 +176,7 @@ public class ItemController {
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    // JUST FOR GOALS AS OF 3/6/18 -- if some kind soul wants to generalize this, go right ahead!
+    // JUST FOR GOALS AS OF 3/6/18 -- if some kind soul wants to generalize this, go right ahead! :P
     public String addNewItem(int user_id, String goal, long timeCreated, boolean complete) {
 
         Document newItem = new Document();

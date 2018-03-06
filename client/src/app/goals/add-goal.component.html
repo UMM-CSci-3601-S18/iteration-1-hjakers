@@ -8,7 +8,7 @@
                     <input matInput #input id="goalField" placeholder="Goal" [(ngModel)]="data.goal.goal">
                 </mat-form-field>
                 <!-- [mat-dialog-close]="data.user" causes the data.user object to be returned when the dialog is closed. -->
-                <button mat-button id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button">Add goal</button>
+                <button mat-button id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button" onclick="">Add goal</button>
             </mat-card-content>
         </mat-card>
         <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()" type="button">Exit</button>

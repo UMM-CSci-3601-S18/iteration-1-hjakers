@@ -90,14 +90,16 @@ public class ItemRequestHandler {
             if(o.getClass().equals(BasicDBObject.class))
             {
                 try {
-                    BasicDBObject dbO = (BasicDBObject) o;
+                    BasicDBObject dbObject = (BasicDBObject) o;
 
-                    String name = dbO.getString("name");
-                    String category = dbO.getString("category");
-                    String goal = dbO.getString("goal");
+                    int user_id = dbObject.getInt("user_id");
+                    String goal = dbObject.getString("goal");
+                    long timeCreated = dbObject.getLong("timeCreated");
+                    boolean complete = dbObject.getBoolean("complete");
 
-                    System.err.println("Adding new item [name=" + name + ", category=" + category + " goal=" + goal + ']');
-                    return itemController.addNewItem(name, category, goal);
+                    // System.err.println("Adding new item [name=" + name + ", category=" + category + " goal=" + goal + ']');
+                    return itemController.addNewItem(user_id, goal,
+                        timeCreated, complete);
                 }
                 catch(NullPointerException e)
                 {

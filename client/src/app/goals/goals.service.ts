@@ -14,6 +14,15 @@ export class GoalsService {
 
     }
 
+    addGoal(user_id: number, newGoalText: string, timeCreated: number, complete: boolean): void {
+        let goal: Goal;
+        goal.user_id = user_id;
+        goal.goal = newGoalText;
+        goal.timeCreated = timeCreated;
+        goal.complete = complete;
+        this.http.post<Goal>(this.goalUrl + '/' + "new", goal);
+    }
+
     getGoals(userId?: number): Observable<Goal[]> {
         this.filterByUserId(userId);
         return this.http.get<Goal[]>(this.goalUrl);
