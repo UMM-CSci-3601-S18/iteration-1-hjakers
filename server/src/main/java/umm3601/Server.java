@@ -65,9 +65,11 @@ public class Server {
 
         //List users, filtered using query parameters
 
-        get("api/users", userRequestHandler::getUsers);
+        // These no longer need to be here--we should also take out the
+        // HTML/CSS stuff that says users because it's not part of the final project
+        /*get("api/users", userRequestHandler::getUsers);
         get("api/users/:id", userRequestHandler::getUserJSON);
-        post("api/users/new", userRequestHandler::addNewUser);
+        post("api/users/new", userRequestHandler::addNewUser);*/
 
         get("api/emoji/:id", itemRequestHandler::getEmojiJSON);
         get("api/emoji", itemRequestHandler::getEmojis);
