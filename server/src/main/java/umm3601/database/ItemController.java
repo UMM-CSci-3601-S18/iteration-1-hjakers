@@ -71,10 +71,6 @@ public class ItemController {
         return itemControllerUtility.getCollectionByName(nameOfCollection);
     }
 
-    private String[] getKeysByCollectionName(String name) {
-        return ItemControllerUtility.getKeysByCollectionName(name);
-    }
-
     public String getItem(String id, String collection) {
         FindIterable<Document> jsonItems
             = itemControllerUtility.getCollectionByName(collection)
@@ -104,10 +100,10 @@ public class ItemController {
         // This bit of code parametrizes the queryParams.containsKey code that we
         // will no longer need because it's all in this loop
         // Update: It works in the intended way depending on the type
-        String[] keys = getKeysByCollectionName(collectionName);
+        String[] keys = ItemControllerUtility.getKeysByCollectionName(collectionName);
         String[] keyTypes = ItemControllerUtility.getKeyTypesByCollectionName(collectionName);
         for(int i = 0; i < keys.length && i < keyTypes.length; i++) {
-            if(queryParams.containsKey(keys[i])) {
+            if(queryParams.containsKey(keys[i]) && !(queryParams.get(keys[i]))[0].equals("")) {
                 switch(keyTypes[i]) {
                     case "int": {
                         int targetInt = Integer.parseInt(queryParams.get(keys[i])[0]);
