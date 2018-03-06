@@ -1,13 +1,11 @@
 package umm3601.database;
 
 import com.google.gson.Gson;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
+
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.IndexModel;
 import com.mongodb.util.JSON;
 import org.bson.*;
 import org.bson.types.ObjectId;
@@ -18,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.mongodb.client.model.Filters.eq;
+
 
 
 // Controller that manages information about people's items.
@@ -94,37 +93,45 @@ public class ItemController {
 
         Document filterDoc = new Document();
 
-        // We will need more statements here for different objects,
-        // such as emoji, category, etc.
-
         // This bit of code parametrizes the queryParams.containsKey code that we
         // will no longer need because it's all in this loop
         // Update: It works in the intended way depending on the type
         String[] keys = ItemControllerUtility.getKeysByCollectionName(collectionName);
         String[] keyTypes = ItemControllerUtility.getKeyTypesByCollectionName(collectionName);
         for(int i = 0; i < keys.length && i < keyTypes.length; i++) {
-            System.out.println(i);
             if(queryParams.containsKey(keys[i])) {
                 switch(keyTypes[i]) {
                     case "int": {
-                        int targetInt = Integer.parseInt(queryParams.get(keys[i])[0]);
-                        filterDoc = filterDoc.append(keys[i], targetInt);
+                        if(!(queryParams.get(keys[i])[0].equals("0"))) {
+                            int targetInt = Integer.parseInt(queryParams.get(keys[i])[0]);
+                            System.out.println(targetInt);
+                            filterDoc.append(keys[i], targetInt);
+                            System.out.println(filterDoc.toJson());
+                        }
                     }
-                    case "String": {
-                        String targetContent = (queryParams.get(keys[i])[0]);
-                        Document contentRegQuery = new Document();
-                        contentRegQuery.append("$regex", targetContent);
-                        contentRegQuery.append("$options", "i");
-                        filterDoc = filterDoc.append(keys[i], contentRegQuery);
-                    }
-                    case "long": {
-                        long targetLong = Long.parseLong(queryParams.get(keys[i])[0]);
-                        filterDoc = filterDoc.append(keys[i], targetLong);
-                    }
-                    case "boolean": {
+                    // kick the can down the line for someone else to figure out how to exclude things that
+                        // aren't in there but are still keyed
+                    /*case "String": {
+                        if(!(queryParams.get(keys[i])[0] .equals(""))) {
+                            String targetContent = (queryParams.get(keys[i])[0]);
+                            Document contentRegQuery = new Document();
+                            contentRegQuery.append("$regex", targetContent);
+                            contentRegQuery.append("$options", "i");
+                            filterDoc.append(keys[i], contentRegQuery);
+                        }
+                    }*/
+                    // it was messing with the code so I commented it out 3/6/18 -ALC
+                    /*case "long": {
+                        if(!(queryParams.get(keys[i])[0].equals("0"))) {
+                            long targetLong = Long.parseLong(queryParams.get(keys[i])[0]);
+                            filterDoc.append(keys[i], targetLong);
+                        }
+                    }*/
+                    // we're not filtering by booleans on the back-end, too many issues
+                    /*case "boolean": {
                         boolean targetBool = Boolean.parseBoolean(queryParams.get(keys[i])[0]);
-                        filterDoc = filterDoc.append(keys[i], targetBool);
-                    }
+                        filterDoc.append(keys[i], targetBool);
+                    }*/
                 }
             }
         }
@@ -155,7 +162,8 @@ public class ItemController {
             filterDoc = filterDoc.append("name", contentRegQuery);
         }*/
 
-        // FindIterable comes from mongo, Document comes from Gson
+        // FindIterable comes from mongo, Document comes from Bson
+        System.out.println(filterDoc.toJson());
         FindIterable<Document> matchingItems = itemControllerUtility.getCollectionByName(collectionName).find(filterDoc);
 
         return JSON.serialize(matchingItems);
