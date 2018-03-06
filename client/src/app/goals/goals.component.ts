@@ -5,7 +5,7 @@ import {MatDialog} from '@angular/material';
 import {Goal} from './goal'
 
 @Component({
-    selector: 'app-goals-component',
+    selector: 'goals-component',
     templateUrl: 'goals.component.html',
     styleUrls: ['./goals.component.css'],
 })

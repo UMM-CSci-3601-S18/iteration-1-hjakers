@@ -20,17 +20,32 @@
 
     <!-- Your Goals Section -->
         <div class="second-sec">
-        <mat-card> <mat-card-title class="your-goals-title">Your Goals</mat-card-title>
+        <mat-card>
+            <mat-card-title class="your-goals-title">Your Goals</mat-card-title>
             <mat-card-subtitle class="your-goals-subtitle">All of your goals are displayed here.</mat-card-subtitle>
-            <mat-accordion class="your-goals-content">
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title matTooltip="email: " ></mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-panel-description >Works for </mat-panel-description>
-                    <mat-panel-description>Age: years old</mat-panel-description>
-                </mat-expansion-panel>
-            </mat-accordion>
+            <mat-card-content>
+                <mat-form-field>
+                    <input matInput id="goalUserId" #input type="number" placeholder="Enter your user id" (input)="goalUserId = $event.target.value">
+                </mat-form-field>
+                <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit</button>
+
+                <mat-accordion class="your-goals-content" *ngIf="goals; else goalsError">
+                    <mat-expansion-panel #elem class="goals" [id]="goal._id" *ngFor="let goal of this.filterGoals(null, null, null)">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title matTooltip="email: " ></mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-panel-description>Goal: {{goal.goal}} </mat-panel-description>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <ng-template #goalsError>
+                    <mat-error>
+                        No goals could be found. You may not have any goals, the server could potentially be down, or there could be network issues.
+                    </mat-error>
+                    <mat-error>
+                        Please wait a bit and try again. If the problem persists, verify that you've added at least one goal.
+                    </mat-error>
+                </ng-template>
+            </mat-card-content>
         </mat-card>
     </div>
     </div>
