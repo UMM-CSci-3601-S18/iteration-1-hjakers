@@ -171,25 +171,26 @@ public class ItemController {
 
     /**
      * Helper method which appends received item information to the to-be added document
-     *
-     * @param name
-     * @param goal
+
      * @return boolean after successfully or unsuccessfully adding a user
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewItem(String name, String category, String goal) {
+    // JUST FOR GOALS AS OF 3/6/18 -- if some kind soul wants to generalize this, go right ahead!
+    public String addNewItem(int user_id, String goal, long timeCreated, boolean complete) {
 
         Document newItem = new Document();
-        newItem.append("name", name);
-        newItem.append("category", name);
+        newItem.append("user_id", user_id);
         newItem.append("goal", goal);
+        newItem.append("timeCreated", timeCreated);
+        newItem.append("complete", complete);
         // Append new items here
 
         try {
             itemCollection.insertOne(newItem);
             ObjectId id = newItem.getObjectId("_id");
-            System.err.println("Successfully added new item [name=" + name + ", category=" + category + " goal=" + goal + ']');
+            System.err.println("Successfully added new item [user_id " + user_id +
+                " goal: " + goal + " timeCreated: " + timeCreated + "complete: " + complete +']');
             // return JSON.serialize(newItem);
             return JSON.serialize(id);
         } catch(MongoException me) {
