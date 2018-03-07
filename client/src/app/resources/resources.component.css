@@ -13,9 +13,9 @@
     border-style: solid;
 }
 
-.whole-body {
-    background-color: #e6e5ee;
-}
+/*.whole-body {
+    background-color: #3d61ee;
+}*/
 
 .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
