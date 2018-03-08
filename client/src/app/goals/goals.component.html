@@ -27,6 +27,7 @@
             <mat-accordion *ngIf="goals; else goalsError" >
                 <mat-expansion-panel #elem class="goals" [id]="goal.name" [expanded]="this.isHighlighted(goal)" *ngFor="let goal of this.filterGoals(goalGoal, goalCategory, goalName)">
                     <mat-expansion-panel-header>
+                        <mat-panel-title><input id="checkFollower" type="checkbox" aria-label="Follower input">{{goal.name}}</mat-panel-title>
                         <mat-panel-title id="name">{{goal.name}}</mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-panel-description>Purpose of this goal: {{goal.goal}}</mat-panel-description>
