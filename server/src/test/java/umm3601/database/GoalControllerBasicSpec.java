@@ -20,9 +20,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class ItemControllerBasicSpec {
-    private ItemController itemController;
-    private ItemController utilItemController;
+public class GoalControllerBasicSpec {
+    private GoalController goalController;
+    private GoalController utilGoalController;
     private ObjectId huntersID;
     @Before
     public void clearAndPopulateDB() throws IOException {
@@ -58,7 +58,7 @@ public class ItemControllerBasicSpec {
         goalDocuments.insertMany(testItems);
         goalDocuments.insertOne(Document.parse(hunter.toJson()));
 
-        itemController = new ItemController(db);
+        goalController = new GoalController(db);
     }
 
     private BsonArray parseJsonArray(String json) {
@@ -87,13 +87,13 @@ public class ItemControllerBasicSpec {
     @Test
     public void getAllItems() {
         Map<String, String[]> emptyMap = new HashMap<>();
-        String jsonResult = itemController.getItems(emptyMap);
+        String jsonResult = goalController.getItems(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
         assertEquals("Should be 4 goals", 4, docs.size());
         List<String> goals = docs
             .stream()
-            .map(ItemControllerBasicSpec::getGoal)
+            .map(GoalControllerBasicSpec::getGoal)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedNames = Arrays.asList("To finish his math homework.", "To get an A in software design!", "To get some pizza.", "To take more than 12 credits.");
@@ -103,15 +103,15 @@ public class ItemControllerBasicSpec {
     @Test
     public void getItemByCategory(){
         Map<String, String[]> argMap = new HashMap<>();
-        // Mongo in ItemController is doing a regex search so can just take a Java Reg. Expression
+        // Mongo in GoalController is doing a regex search so can just take a Java Reg. Expression
         // This will search the category for letters 'f' and 'c'.
         argMap.put("category", new String[] { "[f, c]" });
-        String jsonResult = itemController.getItems(argMap);
+        String jsonResult = goalController.getItems(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
         assertEquals("Should be 3 items", 3, docs.size());
         List<String> name = docs
             .stream()
-            .map(ItemControllerBasicSpec::getName)
+            .map(GoalControllerBasicSpec::getName)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedName = Arrays.asList("Aurora","John","Kai");
@@ -120,25 +120,25 @@ public class ItemControllerBasicSpec {
 
     @Test
     public void getHuntersByID() {
-        String jsonResult = itemController.getItem(huntersID.toHexString());
+        String jsonResult = goalController.getItem(huntersID.toHexString());
         Document hunterDoc = Document.parse(jsonResult);
         assertEquals("Name should match", "Hunter", hunterDoc.get("name"));
-        String noJsonResult = itemController.getItem(new ObjectId().toString());
+        String noJsonResult = goalController.getItem(new ObjectId().toString());
         assertNull("No name should match",noJsonResult);
     }
 
     @Test
     public void addItemTest(){
-        String newId = itemController.addNewItem("Aaron", "Injury", "Do not stab knee on keyboard holder.");
+        String newId = goalController.addNewItem("Aaron", "Injury", "Do not stab knee on keyboard holder.");
 
         assertNotNull("Add new item should return true when item is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
-        String jsonResult = itemController.getItems(argMap);
+        String jsonResult = goalController.getItems(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
         List<String> name = docs
             .stream()
-            .map(ItemControllerBasicSpec::getName)
+            .map(GoalControllerBasicSpec::getName)
             .sorted()
             .collect(Collectors.toList());
         // name.get(0) says to get the name of the first person in the database,

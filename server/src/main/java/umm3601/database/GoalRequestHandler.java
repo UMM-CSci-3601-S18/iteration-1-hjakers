@@ -4,12 +4,11 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
-import umm3601.database.ItemController;
 
-public class ItemRequestHandler {
-    private final ItemController itemController;
-    public ItemRequestHandler(ItemController itemController){
-        this.itemController = itemController;
+public class GoalRequestHandler {
+    private final GoalController goalController;
+    public GoalRequestHandler(GoalController goalController){
+        this.goalController = goalController;
     }
     /**Method called from Server when the 'api/items/:id' endpoint is received.
      * Get a JSON response with a list of all the users in the database.
@@ -25,7 +24,7 @@ public class ItemRequestHandler {
         String id = req.params("id");
         String item;
         try {
-            item = itemController.getItem(id);
+            item = goalController.getItem(id);
         } catch (IllegalArgumentException e) {
             // This is thrown if the ID doesn't have the appropriate
             // form for a Mongo Object ID.
@@ -58,7 +57,7 @@ public class ItemRequestHandler {
     public String getItems(Request req, Response res)
     {
         res.type("application/json");
-        return itemController.getItems(req.queryMap().toMap());
+        return goalController.getItems(req.queryMap().toMap());
     }
 
     /**Method called from Server when the 'api/users/new'endpoint is recieved.
@@ -76,7 +75,7 @@ public class ItemRequestHandler {
         Object o = JSON.parse(req.body());
         try {
             // if the object that is the JSON representation of the request body's class is the class BasicDBObject
-            // then try to add the item with itemController's addNewItem method
+            // then try to add the item with goalController's addNewItem method
             if(o.getClass().equals(BasicDBObject.class))
             {
                 try {
@@ -87,7 +86,7 @@ public class ItemRequestHandler {
                     String goal = dbO.getString("name");
 
                     System.err.println("Adding new item [goal=" + goal + ", category=" + category + " name=" + name + ']');
-                    return itemController.addNewItem(goal, category, name).toString();
+                    return goalController.addNewItem(goal, category, name).toString();
                 }
                 catch(NullPointerException e)
                 {

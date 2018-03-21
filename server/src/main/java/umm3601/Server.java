@@ -4,10 +4,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
+import umm3601.database.GoalController;
 import umm3601.user.UserController;
 import umm3601.user.UserRequestHandler;
-import umm3601.database.ItemController;
-import umm3601.database.ItemRequestHandler;
+import umm3601.database.GoalRequestHandler;
 
 import java.io.IOException;
 
@@ -30,8 +30,8 @@ public class Server {
         UserController userController = new UserController(userDatabase);
         UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
-        ItemController itemController = new ItemController(itemDatabase);
-        ItemRequestHandler itemRequestHandler = new ItemRequestHandler(itemController);
+        GoalController goalController = new GoalController(itemDatabase);
+        GoalRequestHandler goalRequestHandler = new GoalRequestHandler(goalController);
 
         //Configure Spark
         port(serverPort);
@@ -75,9 +75,9 @@ public class Server {
         get("api/users/:id", userRequestHandler::getUserJSON);
         post("api/users/new", userRequestHandler::addNewUser);
 
-        get("api/goals", itemRequestHandler::getItems);
-        get("api/goals/:id", itemRequestHandler::getItemJSON);
-        post("api/goals/new", itemRequestHandler::addNewItem);
+        get("api/goals", goalRequestHandler::getItems);
+        get("api/goals/:id", goalRequestHandler::getItemJSON);
+        post("api/goals/new", goalRequestHandler::addNewItem);
 
 
         // An example of throwing an unhandled exception so you can see how the

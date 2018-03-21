@@ -16,7 +16,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 
 // Controller that manages information about people's items.
-public class ItemController {
+public class GoalController {
 
     private final Gson gson;
     private MongoDatabase database;
@@ -24,7 +24,7 @@ public class ItemController {
     private final MongoCollection<Document> itemCollection;
 
     // Construct controller for items.
-    public ItemController(MongoDatabase database) {
+    public GoalController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
         itemCollection = database.getCollection("goals");
