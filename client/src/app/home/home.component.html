@@ -5,10 +5,70 @@
 <br>
 <div layout-gt-sm="row" class="main-bg">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
-            <mat-card-title id="hello-world">Friendly Panda</mat-card-title>
+            <mat-card-title id="title">Friendly Panda</mat-card-title>
             <br>
-        <mat-card class="page-buttons">
+        <mat-card id="mainCard">
+
+            <mat-card-title style="text-align: center;">
+                <h2>How are you feeling today?</h2>
+                <br>
+                I'm feeling {{emotion()}}.
+            </mat-card-title>
+            <br>
+
+            <div class="emotionSelection" id="emotion">
+                <img id="happy" width= "10%" src="../../assets/images/emotions/happy.svg"
+                     (click)="setEmotion('happy'); selectEmotion('happy')">
+
+                <img id="sad" width= "10%" src="../../assets/images/emotions/sad.svg"
+                     (click)="setEmotion('sad'); selectEmotion('sad')">
+
+                <img id="meh" width= "10%" src="../../assets/images/emotions/meh.svg"
+                     (click)="setEmotion('meh'); selectEmotion('meh')">
+
+                <img id="mad" width= "10%" src="../../assets/images/emotions/mad.svg"
+                     (click)="setEmotion('mad'); selectEmotion('mad')">
+
+                <img id="scared" width= "10%" src="../../assets/images/emotions/scared.svg"
+                     (click)="setEmotion('scared'); selectEmotion('scared')">
+
+                <img id="anxious" width= "10%" src="../../assets/images/emotions/anxious.svg"
+                     (click)="setEmotion('anxious'); selectEmotion('anxious')">
+            </div>
+            <br>
+
+            <div class="journalEntry" *ngIf="showTextBox()">
+
+                <div class="emotionSelection">
+                    <h2>How intense are your feelings?</h2>
+                    <p>(1 means mild, 5 means extreme)</p>
+
+                    <mat-slider
+                        class="slider"
+                        [max]="5"
+                        [min]="1"
+                        [step]="1"
+                        [thumb-label]="thumbLabel"
+                        [(ngModel)]="emojiRating">
+                    </mat-slider>
+
+                </div>
+
+                I'm feeling this way because...
+                <br>
+                <textarea id="entryBox" rows="4" cols="50" (input)="emotionDescription=$event.target.value"></textarea>
+            </div>
+
+            <div class="entryButtons">
+                <button mat-raised-button id="cancel" (click)="resetPage()">Cancel</button>
+                <button mat-raised-button id="save"
+                        [disabled]="showSaveButton()" (click)="getDate();saveEmotion()" >Save</button>
+            </div>
+
+            <br>
+
+
         </mat-card>
     </div>
 </div>
-</body>
+

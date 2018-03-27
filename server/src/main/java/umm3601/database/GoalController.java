@@ -15,33 +15,33 @@ import java.util.Map;
 import static com.mongodb.client.model.Filters.eq;
 
 
-// Controller that manages information about people's items.
-public class ItemController {
+// Controller that manages information about people's goals.
+public class GoalController {
 
     private final Gson gson;
     private MongoDatabase database;
-    // itemCollection is the collection that the goals data is in.
-    private final MongoCollection<Document> itemCollection;
+    // goalCollection is the collection that the goals data is in.
+    private final MongoCollection<Document> goalCollection;
 
-    // Construct controller for items.
-    public ItemController(MongoDatabase database) {
+    // Construct controller for goals.
+    public GoalController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
-        itemCollection = database.getCollection("goals");
+        goalCollection = database.getCollection("goals");
     }
 
-    // get an item by its ObjectId, not used by client, for potential future use
-    public String getItem(String id) {
-        FindIterable<Document> jsonItems
-            = itemCollection
+    // get a goal by its ObjectId, not used by client, for potential future use
+    public String getGoal(String id) {
+        FindIterable<Document> jsonGoals
+            = goalCollection
             .find(eq("_id", new ObjectId(id)));
 
-        Iterator<Document> iterator = jsonItems.iterator();
+        Iterator<Document> iterator = jsonGoals.iterator();
         if (iterator.hasNext()) {
-            Document item = iterator.next();
-            return item.toJson();
+            Document goal = iterator.next();
+            return goal.toJson();
         } else {
-            // We didn't find the desired item
+            // We didn't find the desired goal
             return null;
         }
     }
@@ -50,7 +50,7 @@ public class ItemController {
     // documents if no query parameter is specified. If the goal parameter is
     // specified, then the collection is filtered so only documents of that
     // specified goal are found.
-    public String getItems(Map<String, String[]> queryParams) {
+    public String getGoals(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
 
@@ -87,9 +87,9 @@ public class ItemController {
         }
 
         // FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingItems = itemCollection.find(filterDoc);
+        FindIterable<Document> matchingGoals = goalCollection.find(filterDoc);
 
-        return JSON.serialize(matchingItems);
+        return JSON.serialize(matchingGoals);
     }
 
     /**
@@ -101,22 +101,46 @@ public class ItemController {
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewItem(String goal, String category, String name) {
+    public String addNewGoal(String goal, String category, String name) {
 
         // makes the search Document key-pairs
-        Document newItem = new Document();
-        newItem.append("goal", name);
-        newItem.append("category", category);
-        newItem.append("name", goal);
-        // Append new items here
+        Document newGoal = new Document();
+        newGoal.append("goal", name);
+        newGoal.append("category", category);
+        newGoal.append("name", goal);
+        // Append new goals here
 
         try {
-            itemCollection.insertOne(newItem);
-            ObjectId id = newItem.getObjectId("_id");
-            System.err.println("Successfully added new item [goal=" + goal + ", category=" + category + " name=" + name + ']');
-            // return JSON.serialize(newItem);
+            goalCollection.insertOne(newGoal);
+            ObjectId id = newGoal.getObjectId("_id");
+            System.err.println("Successfully added new goal [_id=" + id + ", goal=" + goal + ", category=" + category + " name=" + name + ']');
+            // return JSON.serialize(newGoal);
             return JSON.serialize(id);
         } catch(MongoException me) {
+            me.printStackTrace();
+            return null;
+        }
+    }
+
+    public String editGoal(String id, String goal, String category, String name) {
+
+        Document newGoal = new Document();
+        newGoal.append("goal", name);
+        newGoal.append("category", category);
+        newGoal.append("name", goal);
+
+        Document setQuery = new Document();
+        setQuery.append("$set", newGoal);
+
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
+
+
+        try {
+            goalCollection.updateOne(searchQuery, setQuery);
+            ObjectId id1 = searchQuery.getObjectId("_id");
+            System.err.println("Successfully updated goal [_id" + id1 + ", goal=" + goal + ", category=" + category + " name=" + name + ']');
+            return JSON.serialize(id1);
+        } catch (MongoException me) {
             me.printStackTrace();
             return null;
         }

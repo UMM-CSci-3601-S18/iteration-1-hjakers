@@ -20,17 +20,17 @@
 .first-sec {
     width: 325px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .goal-title {
-    text-align: justify;
     font-size: 32px;
 }
 
 .goal-content {
-    margin-left: 25px;
     list-style-type: none;
     font-size: 21px;
+
 }
 
 .second-sec {
@@ -38,8 +38,8 @@
 }
 
 .your-goals-title {
-    text-align: left;
-    font-size: 32px;
+    text-align: center;
+
 }
 
 #add-icon {
@@ -56,4 +56,8 @@
 
 .goal-button {
     font-size: 25px;
+}
+
+#your-goals {
+    font-size: 32px;
 }

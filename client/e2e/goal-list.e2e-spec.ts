@@ -27,7 +27,7 @@ describe('Goal list', () => {
 
     it('should get and highlight Goals title attribute ', () => {
         GoalPage.navigateTo();
-        expect(page.getGoalTitle()).toEqual('Goals');
+        expect(page.getGoalTitle()).toEqual('Your Goals');
     });
 
     it('Should have an add goal button', () => {
