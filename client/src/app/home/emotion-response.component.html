@@ -1,0 +1,46 @@
+
+<div flex-gt-sm="80" flex-offset-gt-sm="10">
+        <mat-card>
+            <mat-card-title>I'm sorry to hear that.</mat-card-title>
+            <br>
+            <mat-card-content>
+            Would you like some help?
+            <mat-divider></mat-divider>
+
+            <div *ngIf="!giveResponse==true">
+                <button mat-raised-button id="yesButton" (click)="onYesClick()" type="button">Yes</button>
+                <button mat-raised-button id="noButton" (click)="onExitClick()" type="button">No</button>
+            </div>
+            <div *ngIf="giveResponse==true">
+                <br>
+                <div class="container">
+                    <iframe id="responseVideoFrame"
+                            src="https://www.youtube.com/embed/CyOMgwGiYBc"
+                            frameborder="0"
+                            allowfullscreen
+                            class="video"></iframe>
+
+                    <!--
+                    failed attempt at variable video
+                    <iframe id="responseVideoFrame"
+                            [src]="selectedResponse"
+                            frameborder="0"
+                            allowfullscreen
+                            class="video"></iframe>
+                    -->
+                </div>
+                <br>
+                <mat-divider></mat-divider>
+                <br>
+                <a [routerLink]="['/resources']" routerLinkActive="active" (click)="onExitClick()">And there's more stuff here!</a>
+                <br>
+                <button mat-raised-button id="exitButton" (click)="onExitClick()" type="button">Exit</button>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            </mat-card-content>
+        </mat-card>
+
+</div>
+

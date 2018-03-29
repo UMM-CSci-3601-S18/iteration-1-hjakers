@@ -1,25 +1,25 @@
 [{
-    "_id": "1",
+    "_id": {"$oid": "5ab41f14052e3c3302664b71"},
     "goal": "To have a more sanitary living environment.",
     "category": "Chores",
     "name": "Wash the dishes."
 }, {
-    "_id": "2",
+    "_id": {"$oid": "5ab41f14aafb083c32f58245"},
     "goal": "To improve my relationship with my mom.",
     "category": "Family",
     "name": "Call my mom."
 }, {
-    "_id": "3",
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd8"},
     "goal": "To have a better connection with my brother.",
     "category": "Family",
     "name": "Write letter to brother."
 }, {
-    "_id": "4",
+    "_id": {"$oid": "5ab41f149d06a8beceb914ba"},
     "goal": "To get some more sleep.",
     "category": "Personal health.",
     "name": "Go to bed early."
 }, {
-    "_id": "5",
+    "_id": {"$oid": "5ab41f14858815fffe2f16f8"},
     "goal": "To have a safer driveway and sidewalk.",
     "category": "Chores",
     "name": "Shovel the snow."

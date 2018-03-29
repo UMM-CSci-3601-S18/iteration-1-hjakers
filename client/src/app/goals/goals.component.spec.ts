@@ -89,7 +89,7 @@ describe('Goal ', () => {
         });
     });
 
-    it('goal  filters by chores', () => {
+    it('goal filters by chores', () => {
         expect(goal.filteredGoals.length).toBe(3);
         goal.goalCategory = 'Chores';
         goal.refreshGoals().subscribe(() => {
@@ -97,7 +97,7 @@ describe('Goal ', () => {
         });
     });
 
-    it('goal  filters by name and category', () => {
+    it('goal filters by name and category', () => {
         expect(goal.filteredGoals.length).toBe(3);
         goal.goalCategory = 'Workout';
         goal.goalName = 'y';
@@ -216,3 +216,78 @@ describe('Adding a goal', () => {
         expect(calledGoal).toEqual(newGoal);
     });
 });
+
+// Editing a goal test is commented out as it currently doesn't pass
+// Need to fix this
+
+/*describe('Editing a goal', () => {
+    let goal: GoalsComponent;
+    let fixture: ComponentFixture<GoalsComponent>;
+
+    const goalToEdit: Goal = this.goalService.getGoalByID('2');
+    const editedGoal: Goal = this.goalService.getGoalByID('2');
+
+    editedGoal.name = 'Workout';
+    editedGoal.goal = 'To get bigger and have a healthy body.';
+    editedGoal.category = 'Health';
+
+    let calledGoal: Goal;
+
+    let goalServiceStub: {
+        getGoals: () => Observable<Goal[]>,
+        editGoal: (id: string) => Observable<{'$oid': string}>
+    };
+
+
+    let mockMatDialog: {
+        open: (EditGoalComponent, any) => {
+            afterClosed: () => Observable<Goal>
+        };
+    };
+
+    beforeEach(() => {
+        calledGoal = null;
+        // stub GoalService for test purposes
+        goalServiceStub = {
+            getGoals: () => Observable.of([]),
+            editGoal: (editId: string) => {
+                calledGoal = goalToEdit;
+                return Observable.of({
+                    '$oid': editId
+                });
+            }
+        };
+        mockMatDialog = {
+            open: () => {
+                return {
+                    afterClosed: () => {
+                        return Observable.of(editedGoal);
+                    }
+                };
+            }
+        };
+
+        TestBed.configureTestingModule({
+            imports: [FormsModule, CustomModule],
+            declarations: [GoalsComponent],
+            providers: [
+                {provide: GoalsService, useValue: goalServiceStub},
+                {provide: MatDialog, useValue: mockMatDialog},
+                {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+        });
+    });
+
+    beforeEach(async(() => {
+        TestBed.compileComponents().then(() => {
+            fixture = TestBed.createComponent(GoalsComponent);
+            goal = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+    }));
+
+    it('calls GoalService.editGoal', () => {
+        expect(calledGoal).toBeNull();
+        goal.openDialogEdit(goalToEdit._id, goalToEdit.goal, goalToEdit.category, goalToEdit.name);
+        expect(calledGoal).toEqual(editedGoal);
+    });
+});*/

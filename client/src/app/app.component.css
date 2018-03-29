@@ -3,7 +3,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: black;
     text-align: center;
 }
 
@@ -15,17 +15,37 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 25px 50px;
+    padding: 25px 25px;
     text-decoration: none;
     font-size: 25px;
 }
 
-li a:hover {
-    /* original color was 111*/
-    background-color: #4CAF50;
+li a mat-icon{
+    display: inline-block;
+    vertical-align: middle;
+
 }
 
-.active {
-    background-color: #4CAF50;
+li a:hover {
+    /* original color was 111*/
+    background-color: grey;
 }
+
+/*.active {
+    background-color: #813772;
+}*/
+
+#home.active{
+    background-color: #6C648B;
+}
+
+#goal.active{
+    background-color: #813772;
+}
+
+#summary.active{
+    background-color: #B6A19E;
+}
+
+
 

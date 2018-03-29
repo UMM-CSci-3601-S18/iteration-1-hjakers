@@ -4,9 +4,11 @@ import {HttpClient} from '@angular/common/http';
 
 import {Goal} from './goal';
 import {GoalsService} from './goals.service';
+import {GoalsComponent} from "./goals.component";
 
 describe('Goal service: ', () => {
     // A small collection of test goals
+
     const testGoals: Goal[] = [
         {
             _id: '1',
@@ -144,4 +146,17 @@ describe('Goal service: ', () => {
         expect(req.request.method).toEqual('POST');
         req.flush(jesse_id);
     });
+
+    it('editing a goal calls api/goals/edit', () => {
+        const gymId = testGoals[0]._id;
+
+        goalService.editGoal(gymId).subscribe();
+
+        const expectedUrl: string = goalService.baseUrl + '/edit';
+        const req = httpTestingController.expectOne(expectedUrl);
+        expect(req.request.method).toEqual('POST');
+        req.flush(gymId);
+    });
+
+
 });

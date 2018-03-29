@@ -1,7 +1,7 @@
 <div class="add-goal" layout-gt-sm="row">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
         <mat-card>
-            <mat-card-title>New Goal</mat-card-title>
+            <mat-card-title align="center">New Goal</mat-card-title>
             <mat-divider></mat-divider>
             <mat-card-content>
                 <mat-form-field>
@@ -11,12 +11,15 @@
                     <input matInput #input id="categoryField" placeholder="What category is this?" [(ngModel)]="data.goal.category">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput #input id="purposeField" placeholder="What is the purpose?" [(ngModel)]="data.goal.goal">
+                    <textarea matInput matTextareaAutosize #input id="purposeField" placeholder="What is the purpose?" [(ngModel)]="data.goal.goal"></textarea>
                 </mat-form-field>
             </mat-card-content>
         </mat-card>
-        <button mat-raised-button="" id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button">Add goal</button>
-        <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()" type="button">Exit</button>
+        <div class="buttonGroup">
+            <button mat-raised-button="" id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button">Add goal</button>
+            <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()" type="button">Exit</button>
+        </div>
+
     </div>
 </div>
 
