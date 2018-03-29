@@ -1,0 +1,98 @@
+
+.main-top {
+    height: 100px;
+    color: white;
+    background-color: black;
+    width: 100%;
+    text-align: center;
+    font-size: 36px;
+    font-family: Roboto, sans-serif;
+    font-weight: normal;
+    line-height: 100px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+.whole-body {
+    background-color: #1E392A;
+
+}
+
+.add-journal2{
+    width: 50%;
+    background-color: gray;
+}
+
+
+
+.first-sec {
+
+
+    width: 30%;
+    left: 0px;
+}
+
+.body{
+    background-color: black;
+}
+
+
+
+#edit-icon {
+    color: lightseagreen;
+}
+
+#delete-icon {
+    color: red;
+}
+
+.goal-button {
+    font-size: 25px;
+}
+
+#addJournalButton{
+    padding-left: 0.5%;
+    padding-top: 1%;
+}
+
+.journals{
+    width:30%;
+    text-align: center;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: whitesmoke;
+}
+
+#dateContent{
+    font-size: 80%;
+    color: black;
+}
+
+#titleContent{
+    font-family: Georgia;
+    font-size: 105%;
+    text-align: center;
+    color: black;
+}
+
+#bodyContent{
+    color: black;
+}
+
+#contentTitle{
+    text-align: center;
+}
+
+#add-icon-journal{
+
+}
+
+.addJournalButton{
+
+}
+
+.titleField{
+
+}

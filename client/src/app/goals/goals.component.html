@@ -1,35 +1,33 @@
 <body class="whole-body">
-<header>
-    <div class ="main-top" id="goal-main-title">Goals</div>
-</header>
 
 <main>
     <div layout="column">
 
     <!-- Managing Goals Card -->
-        <div class="first-sec">
-        <mat-card> <mat-card-title class="goal-title">Managing Goals</mat-card-title>
-            <mat-card-subtitle class="goal-subtitle"></mat-card-subtitle>
-            <mat-card-content class="goal-content">
-                <li class="content-item" id="addNewGoal"><button mat-raised-button (click)="openDialog()" class="goal-button"><mat-icon id="add-icon">add</mat-icon>Create</button></li>
-                <br>
-            </mat-card-content>
-        </mat-card>
-    </div>
+
+        <div class="createGoal">
+        <button mat-raised-button (click)="openDialog()" class="goal-button"><mat-icon id="add-icon">add</mat-icon>Create a Goal</button>
+        </div>
 
     <!-- Your Goals Section -->
         <div class="second-sec">
-        <mat-card> <mat-card-title class="your-goals-title">Your Goals</mat-card-title>
-            <mat-card-subtitle class="your-goals-subtitle">All of your goals are displayed here.</mat-card-subtitle>
-            <mat-accordion *ngIf="goals; else goalsError" >
-                <mat-expansion-panel #elem class="goals" [id]="goal.name" [expanded]="this.isHighlighted(goal)" *ngFor="let goal of this.filterGoals(goalGoal, goalCategory, goalName)">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title id="name">{{goal.name}}</mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-panel-description>Purpose of this goal: {{goal.goal}}</mat-panel-description>
-                    <mat-panel-description>Category: {{goal.category}}</mat-panel-description>
-                </mat-expansion-panel>
-            </mat-accordion>
+        <mat-card id="mainCard"><mat-card-title id="your-goals" class="your-goals-title">Your Goals</mat-card-title>
+            <mat-card-subtitle class="your-goals-title">All of your goals are displayed here.</mat-card-subtitle>
+            <div layout="row" layout-wrap>
+                <mat-card #elem class="goals" [id]="goal.name" *ngFor="let goal of this.filterGoals(goalGoal, goalCategory, goalName)">
+
+                    <mat-card-content class="content"><h2><i>{{goal.name}}</i></h2>
+                        <i>Category:</i> {{goal.category}}<br>
+                        <i>Purpose of this goal:</i> {{goal.goal}}
+                    </mat-card-content>
+
+                    <div id="editButton">
+                        <button mat-icon-button (click)="openDialogEdit(goal._id['$oid'], goal.name, goal.category, goal.goal)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    </div>
+                </mat-card>
+            </div>
             <ng-template #goalsError>
                 <mat-error>
                     There was a problem loading the goals. Possibly the server is down or perhaps there are network

@@ -1,0 +1,26 @@
+[{
+    "_id": {"$oid": "5ab41f14052e3c3302664b72"},
+    "resource": "https://www.youtube.com/watch?v=aiTgKYqRUXc",
+    "category": "mad",
+    "name": "Remedy For Anger Management"
+}, {
+    "_id": {"$oid": "5ab41f14aafb083c32f58246"},
+    "resource": "https://www.youtube.com/watch?v=J0EUxEkm4kc",
+    "category": "sad",
+    "name": "Cute Animal Babies Videos 2017"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd7"},
+    "resource": "https://www.youtube.com/watch?v=de2TdvDaS5A",
+    "category": "mad",
+    "name": "Music to Soothe Anger: A Touch of Calm"
+}, {
+    "_id": {"$oid": "5ab41f149d06a8beceb914bd"},
+    "resource": "https://www.youtube.com/watch?v=YeM2yhULSVM",
+    "category": "anxious",
+    "name": "Spoken Affirmations For Panic Attack, Anxiety and to calm down"
+}, {
+    "_id": {"$oid": "5ab41f14858815fffe2f16f9"},
+    "resource": "https://www.youtube.com/watch?v=1Wj74we81hA",
+    "category": "scared",
+    "name": "Calm Music to Overcome Fears - Becoming Self Confident"
+}]

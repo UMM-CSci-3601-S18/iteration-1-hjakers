@@ -4,12 +4,43 @@
 </head>
 <body>
 
-<ul class="nav-things">
-    <li><a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
-    <li><a [routerLink]="['/goals']" routerLinkActive="active">Goals</a></li>
-    <li><a [routerLink]="['/resources']" routerLinkActive="active">Resources</a></li>
-</ul>
+<div *ngIf="currentScreenWidth < 806; then mobile else computer"></div>
+
+<ng-template #computer >
+    <div (window:resize)="onResize($event)"></div>
+
+
+
+    <ul class="nav-things" >
+        <li><a id="home" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><mat-icon>home</mat-icon> Home</a></li>
+        <li><a id="goal"[routerLink]="['/goals']" routerLinkActive="active"><mat-icon>import_contacts</mat-icon> Goals</a></li>
+        <li><a id="journal"[routerLink]="['/journals']" routerLinkActive="active"><mat-icon>book</mat-icon> Journals</a></li>
+        <li><a id="resources"[routerLink]="['/resources']" routerLinkActive="active"><mat-icon>message</mat-icon> Resources</a></li>
+        <li><a id="summary"[routerLink]="['/summary']" routerLinkActive="active"><mat-icon>assessment</mat-icon> Summary</a></li>
+    </ul>
+
 <router-outlet></router-outlet>
+
+</ng-template>
+
+<ng-template id="mobile" #mobile>
+
+    <div (window:resize)="onResize($event)"></div>
+    <ul class="nav-things" >
+        <li><a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><mat-icon>home</mat-icon></a></li>
+        <li><a [routerLink]="['/goals']" routerLinkActive="active"><mat-icon>import_contacts</mat-icon></a></li>
+        <li><a [routerLink]="['/resources']" routerLinkActive="active"><mat-icon>message</mat-icon></a></li>
+        <li><a [routerLink]="['/summary']" routerLinkActive="active"><mat-icon>assessment</mat-icon></a></li>
+        <li><a [routerLink]="['/journals']" routerLinkActive="active"><mat-icon>book</mat-icon></a></li>
+    </ul>
+
+    <router-outlet></router-outlet>
+
+</ng-template>
+
+
+
+
 
 </body>
 </html>

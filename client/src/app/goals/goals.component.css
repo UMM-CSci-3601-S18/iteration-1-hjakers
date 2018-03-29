@@ -3,7 +3,6 @@
     color: white;
     background-color: #ee6e73;
     width: 100%;
-    text-align: center;
     font-size: 36px;
     font-family: Roboto, sans-serif;
     font-weight: normal;
@@ -14,32 +13,43 @@
 }
 
 .whole-body {
-    background-color: rgba(255, 204, 194, 0.73);
+    background-color: #813772;
 }
 
-.first-sec {
-    width: 325px;
-    margin: 0 auto;
+.createGoal {
+    padding-top: 10px;
+    padding-left:10px;
+    width: 10%;
+    text-align: center;
+
+}
+
+#add-icon{
+    font-size: 80%;
+}
+
+.goal-button{
 }
 
 .goal-title {
-    text-align: justify;
     font-size: 32px;
 }
 
 .goal-content {
-    margin-left: 25px;
     list-style-type: none;
     font-size: 21px;
+
 }
 
 .second-sec {
-    width: 100%
+    text-align: center;
+    width: 100%;
+
 }
 
 .your-goals-title {
-    text-align: left;
-    font-size: 32px;
+    text-align: center;
+
 }
 
 #add-icon {
@@ -57,3 +67,44 @@
 .goal-button {
     font-size: 25px;
 }
+
+#your-goals {
+    font-size: 32px;
+}
+
+.goals{
+    width: 30%;
+    display: inline-block;
+    /*text-align: center;*/
+    margin: 0 auto;
+    padding: 1%;
+    background-color: silver;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+
+}
+
+#editButton{
+    text-align: right;
+}
+
+#mainCard{
+    padding: 2%;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+
+}
+
+h2{
+    font-family: Georgia;
+}
+
+.content{
+    font-size: 80%;
+}
+
+
+
+

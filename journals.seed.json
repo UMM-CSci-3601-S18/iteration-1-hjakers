@@ -1,0 +1,26 @@
+[{
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd7"},
+    "title": "It was beautiful outside",
+    "body": "I took a nice walk. It looked nice.",
+    "date": "Wed Mar 28 2018 20:04:01 GMT-0500"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd5"},
+    "title": "I read a cool book",
+    "body": "It was nice",
+    "date": "Wed Mar 23 2018 20:04:01 GMT-0500"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd4"},
+    "title": "I went to work.",
+    "body": "It was stressful. But, I powered through.",
+    "date": "Wed Mar 14 2018 10:04:01 GMT-0500"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd3"},
+    "title": "Exercising",
+    "body": "Personal health is important. I'm glad I started working out.",
+    "date": "Wed Mar 1 2018 7:04:01 GMT-0500"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd1"},
+    "title": "My flower died.",
+    "body": "It's ok. It'll grow again when the snow is gone.",
+    "date": "Wed Mar 3 2018 2:04:01 GMT-0500"
+}]

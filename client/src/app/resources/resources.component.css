@@ -14,12 +14,17 @@
 }
 
 .whole-body {
-    background-color: white;
+    background-color: #24305E;
 }
 
 .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
+}
+
+.best-div {
+    padding: 25px;
+    background-color: #24305E;
 }
 
 #phone-icon {
@@ -31,11 +36,6 @@
 .phone-numbers-title {
     font-size: 24px;
     text-align: center;
-}
-
-.best-div {
-    padding: 25px;
-    background-color: transparent;
 }
 
 #phone-numbers-subtitle {
@@ -78,13 +78,47 @@
     margin: 10%;
 }
 
-#your-loved{
-    max-width: 100%;
-    height: auto;
-}
-
 #breathing{
     max-width: 100%;
+}
+
+.main-card, .resources-card, .phone-numbers{
+    background-color: #A8D0E6;
+
+}
+
+/*mat-card-content{
+    background-color: #c76b25;
+}
+
+mat-card-title{
+    background-color: #c76b25;
+}*/
+
+.phone-div{
+    float: left;
+    width: 25%;
+}
+
+.main-div{
+    float: left;
+    width: 50%;
+}
+
+.resources-div{
+    float: left;
+    width: 50%;
+}
+
+.resources-div{
+    float: left;
+    width: 25%;
+}
+
+@media screen and (max-width: 600px) {
+    .phone-div, .main-div, .resources-div{
+        width: 100%;
+    }
 }
 
 
