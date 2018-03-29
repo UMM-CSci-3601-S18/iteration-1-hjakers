@@ -1,0 +1,130 @@
+<body class="whole-body">
+<div layout-gt-sm="row">
+    <div flex-gt-sm="80" flex-offset-gt-sm="10">
+        <mat-card id="filtering">
+            <div class="top" id="filterCard">
+
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+                <mat-divider></mat-divider>
+                <h3><u><i>Filtering:</i></u></h3>
+
+            <div id="filterContents">
+            <form>
+                <!--# The Angular feature-->
+                <label> Mood:</label>
+                <select name="dropdown" id="summaryMood" #input placeholder="Filter by Mood" (input)="summaryMood = $event.target.value">
+                    <option id ="dropdownAllMoods" selected value="All">All Moods</option>
+                    <option id = "dropdownHappy" value="Happy">Happy</option>
+                    <option id = "dropdownScared" value="Scared">Happy</option>
+                    <option id ="dropdownSad" value="Sad">Sad</option>
+                    <option id ="dropdownMeh" value="Meh">Meh</option>
+                    <option id ="dropdownMad" value="Mad">Mad</option>
+                    <option id ="dropdownAnxious" value="Anxious">Anxious</option>
+                </select>
+            </form>
+
+
+
+                <form>
+                    <label> Intensity: </label>
+                    <select name="dropdownInt" id="summaryInt" #input placeholder="Filter by Intensity" (input)="summaryIntensity = $event.target.value">
+                        <option id="dropdownAll" selected value="All">All</option>
+                        <option id="dropdown1" value="1">1</option>
+                        <option id="dropdown2" value="2">2</option>
+                        <option id="dropdown3" value="3">3</option>
+                        <option id="dropdown4" value="4">4</option>
+                        <option id="dropdown5" value="5">5</option>
+                    </select>
+                </form>
+
+
+                <mat-form-field class="start">
+                    <input
+                        id = "startDate"
+                        matInput [matDatepicker]="start"
+                        placeholder="Choose a Start Date"
+                        [(ngModel)]="startDate"
+                        (input)="startDate = $event.target.value">
+                    <mat-datepicker-toggle id = "startButton" matSuffix [for]="start"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" #start></mat-datepicker>
+                </mat-form-field>
+
+
+                <mat-form-field class="end">
+                    <input
+                        id = "endDate"
+                        matInput [matDatepicker]="end"
+                        placeholder="Choose an End Date"
+                        [(ngModel)]="endDate"
+                        (input)="endDate = $event.target.value">
+                    <mat-datepicker-toggle id = "endButton" matSuffix [for]="end"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" #end></mat-datepicker>
+                </mat-form-field>
+            </div>
+            </div>
+        </mat-card>
+        <mat-card>
+
+
+            <mat-tab-group #myTabGroup >
+                <mat-tab label="Graph View">
+                    <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
+                        <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
+                        <form>
+                            <!--# The Angular feature-->
+                            <label> Day or Hours?:</label>
+                            <select name="dropdown" id="labelType" #input placeholder="Show by Day or Hour" (input)="inputType = $event.target.value">
+                                <option id ="Day" selected value="Day">Day</option>
+                                <option id = "Hour" value="Hour">Hour</option>
+                            </select>
+                        </form>
+                        <button mat-raised-button id="filterButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateChart()">Filter</button>
+                        <br>
+
+                        <canvas id="myChart" height="auto"></canvas>
+
+
+
+                    </mat-card>
+
+                </mat-tab>
+
+                <mat-tab label="List View">
+
+                    <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
+
+                        <mat-card-subtitle class="your-summarys-title">You have {{totalNumberMoods()}} emotions to view</mat-card-subtitle>
+                        <mat-accordion *ngIf="summarys && myTabGroup.selectedIndex == 1; else summarysError">
+                            <mat-expansion-panel #elem class="summarys" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate)">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title id="name">You felt {{summary.mood}} on
+                                        {{stringToDate(summary.date).toLocaleDateString()}} at
+                                        {{stringToDate(summary.date).toLocaleTimeString()}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <mat-panel-description>Journal entry: {{summary.description}}</mat-panel-description>
+                                <mat-panel-description>Intensity: {{summary.intensity}}</mat-panel-description>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+
+
+                        <ng-template #summarysError>
+                            <mat-error>
+                                There was a problem loading the goals. Possibly the server is down or perhaps there are network
+                                issues.
+                            </mat-error>
+                            <mat-error>
+                                Please wait a bit and try again or start the server.
+                            </mat-error>
+                        </ng-template>
+                    </mat-card>
+
+
+
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</div>
+</body>

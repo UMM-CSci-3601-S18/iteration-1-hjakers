@@ -1,0 +1,83 @@
+
+
+<body class="whole-body">
+
+<header>
+    <!-- This allows for good mobile compatibility -->
+    <!-- It might be nice to switch this over to CSS -->
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .phone-div{
+            float: inherit;
+            width: 100%; }
+
+        @media screen and (max-width: 600px) {
+            .phone-div{
+                width: 100%;
+            }
+        }
+    </style>
+    <!-- Finish mobile compatibility -->
+
+</header>
+
+<main>
+    <div layout='row' layout-xs="column" class="best-div">
+
+        <!-- Phone Numbers Card -->
+        <div class="phone-div">
+
+
+
+            <mat-card> <mat-card-title class="journal-title">Managing Journals</mat-card-title>
+                <mat-card-subtitle class="journal-subtitle"></mat-card-subtitle>
+                <mat-card-content class="journal-content">
+                    <li class="content-item" id="addNewJournal"><button mat-raised-button (click)="openDialog()" class="journal-button"><mat-icon id="add-icon">add</mat-icon>Add a Journal</button></li>
+                    <br>
+                </mat-card-content>
+            </mat-card>
+
+
+            <!-- Your Journals Section
+                <div class="second-sec"> -->
+            <mat-card> <mat-card-title class="your-journals-title">Your Journals</mat-card-title>
+                <mat-card-subtitle class="your-journals-subtitle">All of your journals are displayed here.</mat-card-subtitle>
+                <mat-accordion *ngIf="journals; else journalsError" >
+                    <mat-expansion-panel #elem class="journals" [id]="journal.title" [expanded]="this.isHighlighted(journal)" *ngFor="let journal of this.filterJournals( journalTitle,journalBody,journalDate)">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title id="title">{{journal.title}}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-panel-description><Strong>Body: </Strong>{{journal.body}}</mat-panel-description>
+                           <mat-panel-description>Time: {{journal.date}}</mat-panel-description>
+
+
+
+                   </mat-expansion-panel>
+
+
+
+
+                </mat-accordion>
+                <ng-template #journalsError>
+                    <mat-error>
+                        There was a problem loading the journals. Possibly the server is down or perhaps there are network
+                        issues.
+                    </mat-error>
+                    <mat-error>
+                        Please wait a bit and try again or start the server.
+                    </mat-error>
+                </ng-template>
+            </mat-card>
+
+        </div>
+
+
+
+
+
+
+    </div>
+</main>
+</body>

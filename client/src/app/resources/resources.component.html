@@ -1,45 +1,5 @@
 <body class="whole-body">
 
-<header>
-    <!-- This allows for good mobile compatibility -->
-    <!-- It might be nice to switch this over to CSS -->
-    <div class ="main-top">{{this.title}}</div>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-
-        .phone-div{
-            float: left;
-            width: 25%;
-        }
-
-        .main-div{
-            float: left;
-            width: 50%;
-        }
-
-        .resources-div{
-
-            float: left;
-            width: 50%;
-        }
-
-        .resources-div{
-            float: left;
-            width: 25%;
-        }
-
-        @media screen and (max-width: 600px) {
-            .phone-div, .main-div, .resources-div{
-                width: 100%;
-            }
-        }
-
-    </style>
-    <!-- Finish mobile compatibility -->
-
-</header>
-
 <main>
 <div layout='row' layout-xs="column" class="best-div">
 
@@ -91,16 +51,7 @@
             <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">message</mat-icon> 741741</mat-panel-description>
         </mat-expansion-panel>
 
-        <!-- Fourth number (Not Kate's Actual #) -->
-        <mat-expansion-panel #elem class="phone-numbers-to-call">
-            <mat-expansion-panel-header>
 
-                <mat-panel-title class="hotline-company-name">Kate's phone-number</mat-panel-title>
-
-            </mat-expansion-panel-header>
-            <br>
-            <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 555-555-1234</mat-panel-description>
-        </mat-expansion-panel>
         <br>
 
     </mat-card>
@@ -114,10 +65,6 @@
         <mat-card-header>This is a breathing exercise for when you are feeling stressed out. Breathe in as the image is building and out as the image shrinks.</mat-card-header>
         <mat-card-content>
             <img id="breathing" width= "100%" src="../../assets/images/ezgif.com-resize.gif">
-        </mat-card-content>
-        <br>
-        <mat-card-content>
-            <img id="do-it" width= "100%" src="../../assets/images/do-it.gif">
         </mat-card-content>
     </mat-card>
     </div>

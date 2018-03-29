@@ -25,8 +25,8 @@ export class GoalPage {
     }
 
     getGoalTitle() {
-        const title = element(by.id('goal-main-title')).getText();
-        this.highlightElement(by.id('goal-main-title'));
+        const title = element(by.id('your-goals')).getText();
+        this.highlightElement(by.id('your-goals'));
 
         return title;
     }
@@ -40,13 +40,13 @@ export class GoalPage {
     }
 
     buttonExists(): promise.Promise<boolean> {
-        this.highlightElement(by.id('addNewGoal'));
-        return element(by.id('addNewGoal')).isPresent();
+        this.highlightElement(by.id('add-icon'));
+        return element(by.id('add-icon')).isPresent();
     }
 
     clickAddGoalButton(): promise.Promise<void> {
-        this.highlightElement(by.id('addNewGoal'));
-        return element(by.id('addNewGoal')).click();
+        this.highlightElement(by.id('add-icon'));
+        return element(by.id('add-icon')).click();
     }
 
 }

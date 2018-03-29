@@ -4,38 +4,58 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
-import umm3601.user.UserController;
-import umm3601.user.UserRequestHandler;
-import umm3601.database.ItemController;
-import umm3601.database.ItemRequestHandler;
+
+import umm3601.database.GoalController;
+import umm3601.database.GoalRequestHandler;
+import umm3601.database.JournalController;
+import umm3601.database.JournalRequestHandler;
+
+
+import umm3601.database.EmotionController;
+import umm3601.database.EmotionRequestHandler;
+
+import umm3601.database.ResourceController;
+import umm3601.database.ResourceRequestHandler;
 
 import java.io.IOException;
+
+import umm3601.database.SummaryController;
+import umm3601.database.SummaryRequestHandler;
 
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
-    private static final String userDatabaseName = "dev";
-    private static final String itemDatabaseName = "dev";
+    private static final String databaseName = "dev";
 
     private static final int serverPort = 4567;
 
     public static void main(String[] args) throws IOException {
 
         MongoClient mongoClient = new MongoClient();
-        MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
-        MongoDatabase itemDatabase = mongoClient.getDatabase(itemDatabaseName);
+        MongoDatabase database = mongoClient.getDatabase(databaseName);
 
-        UserController userController = new UserController(userDatabase);
-        UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
+        GoalController goalController = new GoalController(database);
+        GoalRequestHandler goalRequestHandler = new GoalRequestHandler(goalController);
 
-        ItemController itemController = new ItemController(itemDatabase);
-        ItemRequestHandler itemRequestHandler = new ItemRequestHandler(itemController);
+        EmotionController emotionController = new EmotionController(database);
+        EmotionRequestHandler emotionRequestHandler = new EmotionRequestHandler(emotionController);
+
+        SummaryController summaryController = new SummaryController(database);
+        SummaryRequestHandler summaryRequestHandler = new SummaryRequestHandler(summaryController);
+
+        ResourceController resourceController = new ResourceController(database);
+        ResourceRequestHandler resourceRequestHandler = new ResourceRequestHandler(resourceController);
+
+        JournalController journalController = new JournalController(database);
+        JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
+
 
         //Configure Spark
         port(serverPort);
         enableDebugScreen();
+
 
         // Specify where assets like images will be "stored"
         staticFiles.location("/public");
@@ -66,18 +86,31 @@ public class Server {
 
         redirect.get("/", "http://localhost:9000");
 
-        /// User Endpoints ///////////////////////////
+        /////////////// Endpoints ///////////////////
         /////////////////////////////////////////////
 
-        //List users, filtered using query parameters
+        //List goals, filtered using query parameters
+        get("api/emotions", emotionRequestHandler::getEmotions);
+        get("api/emotions/:id", emotionRequestHandler::getEmotionJSON);
+        post("api/emotions/new", emotionRequestHandler::addNewEmotion);
 
-        get("api/users", userRequestHandler::getUsers);
-        get("api/users/:id", userRequestHandler::getUserJSON);
-        post("api/users/new", userRequestHandler::addNewUser);
+        get("api/goals", goalRequestHandler::getGoals);
+        get("api/goals/:id", goalRequestHandler::getGoalJSON);
+        post("api/goals/new", goalRequestHandler::addNewGoal);
+        post("api/goals/edit", goalRequestHandler::editGoal);
 
-        get("api/goals", itemRequestHandler::getItems);
-        get("api/goals/:id", itemRequestHandler::getItemJSON);
-        post("api/goals/new", itemRequestHandler::addNewItem);
+        //List summary page
+        get("api/summarys", summaryRequestHandler::getSummaries);
+
+        //Resources for appropriate response
+        get("api/resources", resourceRequestHandler::getResources);
+
+
+        //List journals, filtered using query parameters
+
+        get("api/journals", journalRequestHandler::getJournals);
+        get("api/journals/:id", journalRequestHandler::getJournalJSON);
+        post("api/journals/new", journalRequestHandler::addNewJournal);
 
 
         // An example of throwing an unhandled exception so you can see how the
