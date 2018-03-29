@@ -25,8 +25,8 @@ export class GoalPage {
     }
 
     getGoalTitle() {
-        const title = element(by.id('goal-main-title')).getText();
-        this.highlightElement(by.id('goal-main-title'));
+        const title = element(by.id('your-goals')).getText();
+        this.highlightElement(by.id('your-goals'));
 
         return title;
     }
